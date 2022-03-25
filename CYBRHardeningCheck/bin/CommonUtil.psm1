@@ -2939,6 +2939,8 @@ Function Test-CredFileVerificationType
 				$credFileType = $(Get-Content $CredentialFilePath | Select-String 'CredFileType') -replace 'CredFileType=', ''
 				
 				# Check Credential File Type
+        Write-LogMessage -Type Verbose -Msg "CredFileType = $credFileType"
+        Write-LogMessage -Type Verbose -Msg "User = $vaultUser"
         Write-LogMessage -Type Verbose -Msg "VerificationFlag for $CredentialFilePath = $verificationsFlag"
 				$typeOfCredFile = @{"Password" = "No"; "EnhancedPasswordMachine" = "Machine"; "EnhancedPasswordUser" = "User"; "KeyPair" = "KeyPair" }
 				$credTypeMsg = "Using {0} OS Protected Storage" -f $typeOfCredFile.Get_Item($CredFileType)
