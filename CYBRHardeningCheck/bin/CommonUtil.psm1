@@ -2626,12 +2626,12 @@ Function Compare-EventLogSizeAndRetentionSettings
 			# Check Max Size
 			if (([int]($EntitySettings[1].Split(":")[1].Trim())) -lt $Size)
 			{
-				Write-LogMessage -Type "Info" -Msg "Log Size should be set to $Size"
+				Write-LogMessage -Type "Info" -Msg "Log Size is $([int]($EntitySettings[1].Split(":")[1].Trim())), should be set to $Size"
 				if ($output -ne "")
 				{
 					$output += "<BR>"
 				}
-				$output += "Log Size should be set to $Size"
+				$output += "Log Size is $([int]($EntitySettings[1].Split(":")[1].Trim())), should be set to $Size"
 			}
 
 			if ($output -ne "")
@@ -2939,7 +2939,7 @@ Function Test-CredFileVerificationType
 				$credFileType = $(Get-Content $CredentialFilePath | Select-String 'CredFileType') -replace 'CredFileType=', ''
 				
 				# Check Credential File Type
-				$typeOfCredFile = @{"Password" = "No"; "EnhancedPasswordMachine" = "Machine"; "EnhancedPasswordUser" = "User" }
+				$typeOfCredFile = @{"Password" = "No"; "EnhancedPasswordMachine" = "Machine"; "EnhancedPasswordUser" = "User"; "KeyPair" = "KeyPair" }
 				$credTypeMsg = "Using {0} OS Protected Storage" -f $typeOfCredFile.Get_Item($CredFileType)
 				
 				# Check Cred File Verifications

@@ -733,7 +733,7 @@ Function Vault_KeysProtection
 			foreach ($path in $KeysLocations)
 			{
 				# Test the path before checking permissions
-				If (Test-Path $Path)
+				If ($path -And (Test-Path $path))
 				{
 					Write-LogMessage -Type Verbose -Msg "Checking '$path' permissions..."
 					if ((Compare-UserPermissions -path $path -identity $(Get-LocalAdministrators) -rights "FullControl" -outStatus ([ref]$myRef)) -ne "Good")
@@ -776,8 +776,8 @@ Function Vault_KeysProtection
 		}
 		catch
 		{
-			Write-LogMessage -Type "Error" -Msg "Could not verify Vault Server Certificate. Error: $(Join-ExceptionMessage $_.Exception)"
-			[ref]$refOutput.Value = "Could not verify Vault Server Certificate."
+			Write-LogMessage -Type "Error" -Msg "Could not verify vault encryption keys. Error: $(Join-ExceptionMessage $_.Exception)"
+			[ref]$refOutput.Value = "Could not verify vault encryption keys."
 			return "Bad"
 		}
 	}
